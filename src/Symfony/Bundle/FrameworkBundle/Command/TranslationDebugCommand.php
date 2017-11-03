@@ -272,9 +272,14 @@ EOF
     {
         $extractedCatalogue = new MessageCatalogue($locale);
         foreach ($transPaths as $path) {
-            $path = $path.'views';
-            if (is_dir($path)) {
-                $this->getContainer()->get('translation.extractor')->extract($path, $extractedCatalogue);
+            $pathViews = $path.'views';
+            if (is_dir($pathViews)) {
+                $this->extractor->extract($pathViews, $extractedCatalogue);
+            }
+
+            $pathTemplates = $path.'templates';
+            if (is_dir($pathTemplates)) {
+                $this->extractor->extract($pathTemplates, $extractedCatalogue);
             }
         }
 
